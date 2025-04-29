@@ -1,41 +1,42 @@
-/* Variables para el modo claro */
+/* Variables para el modo ckaro*/
 :root {
-    --color-primary: #3498db;
-    --color-secondary: #2ecc71;
-    --color-accent: #16a085;
-    --color-text: #2c3e50;
-    --color-text-light: #7f8c8d;
-    --color-background: #f5f6fa;
-    --color-card: #ffffff;
-    --color-card-shadow: rgba(0, 0, 0, 0.08);
-    --color-border: #ecf0f1;
-    --color-success: #27ae60;
-    --color-error: #e74c3c;
-    --color-warning: #f39c12;
-    --color-header: #3498db;
-    --color-header-text: #ffffff;
+    --color-primary: #f28c38;
+    --color-secondary: #f9b66e;
+    --color-accent: #ffd6a888;
+    --color-text: #4a2e1e;
+    --color-text-light: #8c6e5c;
+    --color-background: #fff8f1;
+    --color-card: #fff2e0;
+    --color-card-shadow: rgba(242, 140, 56, 0.1);
+    --color-border: #ffe7cd;
+    --color-success: #f5a623;
+    --color-error: #e57357;
+    --color-warning: #f5b042;
+    --color-header: #f0932b;
+    --color-header-text: #0f0e0e;
     --transition-speed: 0.3s;
 }
 
-/* Variables para el modo oscuro */
+/* Variables para el modo oscuro*/
 [data-theme="dark"] {
-    --color-primary: #3498db;
-    --color-secondary: #2ecc71;
-    --color-accent: #16a085;
-    --color-text: #ecf0f1;
-    --color-text-light: #bdc3c7;
-    --color-background: #2c3e50;
-    --color-card: #34495e;
-    --color-card-shadow: rgba(0, 0, 0, 0.25);
-    --color-border: #2c3e50;
-    --color-success: #27ae60;
-    --color-error: #e74c3c;
-    --color-warning: #f39c12;
-    --color-header: #233140;
-    --color-header-text: #ecf0f1;
+    --color-primary: #ffab61;
+    --color-secondary: #ffc58c;
+    --color-accent: #ffe0b28d;
+    --color-text: #f5f0ea;
+    --color-text-light: #cfc2b3;
+    --color-background: #242323;
+    --color-card: #3c2b23;
+    --color-card-shadow: rgba(255, 171, 97, 0.15);
+    --color-border: #4a372d;
+    --color-success: #f5a623;
+    --color-error: #ff8a65;
+    --color-warning: #ffc97c;
+    --color-header: #a64b17;
+    --color-header-text: #fef6f0;
 }
 
-/* Reset y estilos globales */
+
+/* Reset y estilos globaled*/
 * {
     margin: 0;
     padding: 0;
@@ -48,7 +49,7 @@ body {
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-background);
-    padding-bottom: 40px; /* Reducido para el footer más pequeño */
+    padding-bottom: 40px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -56,57 +57,63 @@ body {
 
 /* Animación de entrada para contenido */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Header y navegación - REDUCIDO DE TAMAÑO */
 header {
     background-color: var(--color-header);
     color: var(--color-header-text);
-    padding: 0.8rem 1.5rem; /* Reducido */
+    padding: 0.8rem 1.5rem;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: row; /* Cambio a fila para ahorrar espacio */
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 
 header h1 {
-    margin: 0; /* Eliminado el margen inferior */
-    font-weight: 600; /* Menos pesado */
-    font-size: 1.5rem; /* Reducido */
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.5rem;
     letter-spacing: 0.5px;
 }
 
 nav {
-    width: auto; /* Ajustado */
+    width: auto;
     display: flex;
 }
 
 nav ul {
     display: flex;
-    justify-content: flex-end; /* Alineado a la derecha */
+    justify-content: flex-end;
     list-style: none;
-    margin: 0; /* Reset */
+    margin: 0;
 }
 
 nav li {
-    margin-left: 1rem; /* Espacio entre elementos */
+    margin-left: 1rem;
 }
 
 nav a {
     color: var(--color-header-text);
     text-decoration: none;
-    padding: 0.5rem 0.8rem; /* Reducido */
+    padding: 0.5rem 0.8rem;
     border-radius: 4px;
     transition: background-color 0.3s, transform 0.2s;
     display: block;
     font-weight: 500;
-    font-size: 0.95rem; /* Tamaño de fuente reducido */
+    font-size: 0.95rem;
 }
 
 nav a:hover {
@@ -115,9 +122,10 @@ nav a:hover {
 }
 
 main {
-    flex: 1; /* Para que ocupe todo el espacio disponible */
+    flex: 1;
+    /* Para que ocupe todo el espacio disponible */
     max-width: 1000px;
-    margin: 1.5rem auto; /* Reducido */
+    margin: 1.5rem auto;
     padding: 0 1.5rem;
     animation: fadeIn 0.5s ease-out;
 }
@@ -125,22 +133,22 @@ main {
 /* Footer reducido y mejorado */
 footer {
     text-align: center;
-    padding: 0.6rem; /* Reducido */
+    padding: 0.6rem;
     background-color: var(--color-header);
     color: var(--color-header-text);
     position: fixed;
     bottom: 0;
     width: 100%;
-    font-size: 0.8rem; /* Más pequeño */
+    font-size: 0.8rem;
     z-index: 100;
-    opacity: 0.9; /* Ligeramente transparente */
+    opacity: 0.9;
 }
 
 /* Componente de tarjeta */
 .card {
     background-color: var(--color-card);
     border-radius: 10px;
-    padding: 1.5rem; /* Reducido */
+    padding: 1.5rem;
     box-shadow: 0 4px 12px var(--color-card-shadow);
     transition: transform 0.3s, box-shadow 0.3s;
     overflow: hidden;
@@ -148,7 +156,7 @@ footer {
 }
 
 .card:hover {
-    transform: translateY(-3px); /* Reducido */
+    transform: translateY(-3px);
     box-shadow: 0 6px 18px var(--color-card-shadow);
 }
 
@@ -156,7 +164,7 @@ footer {
 .form-container {
     background-color: var(--color-card);
     border-radius: 10px;
-    padding: 1.5rem; /* Reducido */
+    padding: 1.5rem;
     box-shadow: 0 4px 12px var(--color-card-shadow);
     max-width: 700px;
     margin: 0 auto;
@@ -164,17 +172,17 @@ footer {
 }
 
 .form-container:hover {
-    transform: translateY(-3px); /* Reducido */
+    transform: translateY(-3px);
 }
 
 .form-container h2 {
     text-align: center;
-    margin-bottom: 1.5rem; /* Reducido */
+    margin-bottom: 1.5rem;
     color: var(--color-primary);
     font-weight: 600;
     position: relative;
     padding-bottom: 8px;
-    font-size: 1.5rem; /* Reducido */
+    font-size: 1.5rem;
 }
 
 .form-container h2::after {
@@ -183,23 +191,23 @@ footer {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 40px; /* Reducido */
-    height: 2px; /* Reducido */
+    width: 40px;
+    height: 2px;
     background-color: var(--color-primary);
     border-radius: 2px;
 }
 
 .form-group {
-    margin-bottom: 1.2rem; /* Reducido */
+    margin-bottom: 1.2rem;
     position: relative;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.3rem; /* Reducido */
-    font-weight: 500; /* Menos pesado */
+    margin-bottom: 0.3rem;
+    font-weight: 500;
     color: var(--color-text);
-    font-size: 0.9rem; /* Reducido */
+    font-size: 0.9rem;
     transition: color 0.3s;
 }
 
@@ -209,10 +217,10 @@ footer {
 
 .form-group input {
     width: 100%;
-    padding: 0.7rem 0.9rem; /* Reducido */
+    padding: 0.7rem 0.9rem;
     border: 1px solid var(--color-border);
     border-radius: 6px;
-    font-size: 0.95rem; /* Reducido */
+    font-size: 0.95rem;
     background-color: var(--color-card);
     color: var(--color-text);
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -235,10 +243,10 @@ footer {
 
 .btn {
     background-color: var(--color-primary);
-    color: white;
+    color: rgb(19, 19, 19);
     border: none;
-    padding: 0.7rem 1.2rem; /* Reducido */
-    font-size: 0.95rem; /* Reducido */
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
@@ -261,8 +269,8 @@ footer {
 
 /* Mensaje de respuesta */
 .mensaje {
-    padding: 0.8rem; /* Reducido */
-    margin-bottom: 1.2rem; /* Reducido */
+    padding: 0.8rem;
+    margin-bottom: 1.2rem;
     border-radius: 6px;
     text-align: center;
     font-weight: 500;
@@ -292,19 +300,19 @@ footer {
 .empleados-container {
     background-color: var(--color-card);
     border-radius: 10px;
-    padding: 1.5rem; /* Reducido */
+    padding: 1.5rem;
     box-shadow: 0 4px 12px var(--color-card-shadow);
-    margin-bottom: 3rem; /* Espacio para el footer */
+    margin-bottom: 3rem;
 }
 
 .empleados-container h2 {
     text-align: center;
-    margin-bottom: 1.5rem; /* Reducido */
+    margin-bottom: 1.5rem;
     color: var(--color-primary);
     font-weight: 600;
     position: relative;
     padding-bottom: 8px;
-    font-size: 1.5rem; /* Reducido */
+    font-size: 1.5rem;
 }
 
 .empleados-container h2::after {
@@ -313,41 +321,41 @@ footer {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 40px; /* Reducido */
-    height: 2px; /* Reducido */
+    width: 40px;
+    height: 2px;
     background-color: var(--color-primary);
     border-radius: 2px;
 }
 
 .filtros {
-    margin-bottom: 1.5rem; /* Reducido */
-    padding: 1.2rem; /* Reducido */
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
     background-color: rgba(52, 152, 219, 0.05);
     border-radius: 8px;
     border: 1px solid var(--color-border);
 }
 
 .filtros h3 {
-    margin-bottom: 1rem; /* Reducido */
+    margin-bottom: 1rem;
     color: var(--color-primary);
-    font-size: 1.1rem; /* Reducido */
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
 .filtros form {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem; /* Reducido */
+    gap: 0.8rem;
 }
 
 .filtros .form-group {
     flex: 1 1 200px;
-    margin-bottom: 0.8rem; /* Reducido */
+    margin-bottom: 0.8rem;
 }
 
 .filtros-activos {
-    margin-bottom: 1.5rem; /* Reducido */
-    padding: 0.8rem; /* Reducido */
+    margin-bottom: 1.5rem;
+    padding: 0.8rem;
     background-color: rgba(46, 204, 113, 0.1);
     border-radius: 8px;
     border: 1px solid var(--color-secondary);
@@ -355,30 +363,30 @@ footer {
 }
 
 .filtros-activos h4 {
-    margin-bottom: 0.4rem; /* Reducido */
+    margin-bottom: 0.4rem;
     color: var(--color-secondary);
     font-weight: 600;
-    font-size: 1rem; /* Reducido */
+    font-size: 1rem;
 }
 
 .filtros-activos ul {
     list-style: none;
-    margin-bottom: 0.8rem; /* Reducido */
+    margin-bottom: 0.8rem;
 }
 
 .filtros-activos li {
-    padding: 0.4rem 0; /* Reducido */
+    padding: 0.4rem 0;
     border-bottom: 1px solid rgba(46, 204, 113, 0.2);
-    font-size: 0.9rem; /* Reducido */
+    font-size: 0.9rem;
 }
 
 .boton-limpiar {
     background-color: var(--color-accent);
     color: white;
     text-decoration: none;
-    padding: 0.4rem 0.8rem; /* Reducido */
+    padding: 0.4rem 0.8rem;
     border-radius: 4px;
-    font-size: 0.85rem; /* Reducido */
+    font-size: 0.85rem;
     display: inline-block;
     transition: background-color 0.3s, transform 0.2s;
     font-weight: 500;
@@ -394,16 +402,16 @@ footer {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin-top: 1.5rem; /* Reducido */
+    margin-top: 1.5rem;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 2px 6px var(--color-card-shadow);
-    font-size: 0.9rem; /* Reducido */
+    font-size: 0.9rem;
 }
 
 .tabla-empleados th,
 .tabla-empleados td {
-    padding: 0.8rem 1rem; /* Reducido */
+    padding: 0.8rem 1rem;
     text-align: left;
 }
 
@@ -412,7 +420,7 @@ footer {
     color: white;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.8rem; /* Reducido */
+    font-size: 0.8rem;
     letter-spacing: 0.5px;
 }
 
@@ -450,13 +458,13 @@ footer {
 }
 
 .tabla-container {
-    overflow-x: auto; /* Para tablas responsive */
+    overflow-x: auto;
     margin-bottom: 1.5rem;
 }
 
 .no-empleados {
     text-align: center;
-    padding: 2rem 1.5rem; /* Reducido */
+    padding: 2rem 1.5rem;
     color: var(--color-text-light);
     font-style: italic;
     background-color: var(--color-card);
@@ -476,9 +484,9 @@ footer {
 
 .theme-switch {
     display: inline-block;
-    height: 24px; /* Reducido */
+    height: 24px;
     position: relative;
-    width: 44px; /* Reducido */
+    width: 44px;
 }
 
 .theme-switch input {
@@ -499,28 +507,28 @@ footer {
 
 .slider:before {
     background-color: white;
-    bottom: 3px; /* Ajustado */
+    bottom: 3px;
     content: "";
-    height: 18px; /* Reducido */
-    left: 3px; /* Ajustado */
+    height: 18px;
+    left: 3px;
     position: absolute;
     transition: 0.4s;
-    width: 18px; /* Reducido */
+    width: 18px;
     border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: var(--color-primary);
 }
 
-input:checked + .slider:before {
-    transform: translateX(20px); /* Ajustado */
+input:checked+.slider:before {
+    transform: translateX(20px);
 }
 
 .slider-icon {
     color: var(--color-text);
-    margin: 0 6px; /* Reducido */
-    font-size: 1rem; /* Reducido */
+    margin: 0 6px;
+    font-size: 1rem;
 }
 
 /* Animaciones para elementos */
@@ -530,28 +538,27 @@ input:checked + .slider:before {
     animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Contenedor Toast mejorado */
 .toast-container {
     position: fixed;
-    bottom: 45px; /* Ajustado para que no choque con el footer */
+    bottom: 45px;
     right: 15px;
     z-index: 1000;
-    max-width: 280px; /* Reducido */
+    max-width: 280px;
 }
 
 .toast {
     background-color: var(--color-card);
     color: var(--color-text);
     border-radius: 6px;
-    padding: 10px 12px; /* Reducido */
-    margin-bottom: 8px; /* Reducido */
+    padding: 10px 12px;
+    margin-bottom: 8px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     transform: translateX(100%);
     opacity: 0;
     transition: transform 0.4s ease, opacity 0.4s ease;
     display: flex;
     align-items: center;
-    font-size: 0.9rem; /* Reducido */
+    font-size: 0.9rem;
 }
 
 .toast.show {
@@ -560,16 +567,16 @@ input:checked + .slider:before {
 }
 
 .toast.success {
-    border-left: 3px solid var(--color-success); /* Reducido */
+    border-left: 3px solid var(--color-success);
 }
 
 .toast.error {
-    border-left: 3px solid var(--color-error); /* Reducido */
+    border-left: 3px solid var(--color-error);
 }
 
 .toast-icon {
-    margin-right: 10px; /* Reducido */
-    font-size: 1.1rem; /* Reducido */
+    margin-right: 10px;
+    font-size: 1.1rem;
 }
 
 .toast-message {
@@ -580,7 +587,7 @@ input:checked + .slider:before {
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 2px; /* Reducido */
+    height: 2px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.1);
 }
@@ -596,118 +603,120 @@ input:checked + .slider:before {
 }
 
 @keyframes toast-timer {
-    to { transform: scaleX(0); }
+    to {
+        transform: scaleX(0);
+    }
 }
 
 /* Mejora de responsividad */
 @media (max-width: 1024px) {
     header h1 {
-        font-size: 1.3rem; /* Reducido */
+        font-size: 1.3rem;
     }
-    
+
     .form-container,
     .empleados-container {
-        padding: 1.2rem; /* Reducido */
+        padding: 1.2rem;
     }
 }
 
 @media (max-width: 768px) {
     header {
-        padding: 0.7rem 1rem; /* Reducido */
+        padding: 0.7rem 1rem;
         flex-direction: column;
         align-items: center;
     }
-    
+
     header h1 {
-        margin-bottom: 0.5rem; /* Espacio reducido */
-        font-size: 1.2rem; /* Reducido */
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
     }
-    
+
     nav ul {
         justify-content: center;
     }
-    
+
     nav li {
-        margin: 0 0.4rem; /* Reducido */
+        margin: 0 0.4rem;
     }
-    
+
     .tabla-empleados {
         display: block;
         overflow-x: auto;
-        font-size: 0.85rem; /* Reducido */
-    }
-    
-    .tabla-empleados th,
-    .tabla-empleados td {
-        padding: 0.6rem 0.8rem; /* Reducido */
-    }
-    
-    .filtros form {
-        flex-direction: column;
-    }
-    
-    .filtros .form-group {
-        flex: 1 1 100%;
-    }
-    
-    .form-container h2,
-    .empleados-container h2 {
-        font-size: 1.3rem; /* Reducido */
-    }
-}
+        font-size: 0.85rem;
 
-@media (max-width: 576px) {
-    body {
-        padding-bottom: 35px; /* Reducido */
+        .tabla-empleados th,
+        .tabla-empleados td {
+            padding: 0.6rem 0.8rem;
+        }
+
+        .filtros form {
+            flex-direction: column;
+        }
+
+        .filtros .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-container h2,
+        .empleados-container h2 {
+            font-size: 1.3rem;
+        }
     }
-    
-    main {
-        padding: 0 0.8rem; /* Reducido */
-        margin: 1rem auto; /* Reducido */
-    }
-    
-    header h1 {
-        font-size: 1.1rem; /* Reducido */
-    }
-    
-    nav a {
-        padding: 0.4rem 0.6rem; /* Reducido */
-        font-size: 0.85rem; /* Reducido */
-    }
-    
-    .form-container,
-    .empleados-container {
-        padding: 1rem; /* Reducido */
-    }
-    
-    .form-group label {
-        font-size: 0.85rem; /* Reducido */
-    }
-    
-    .form-group input {
-        padding: 0.6rem; /* Reducido */
-        font-size: 0.9rem; /* Reducido */
-    }
-    
-    .btn {
-        width: 100%;
-        padding: 0.6rem 1rem; /* Reducido */
-    }
-    
-    .theme-switch-wrapper {
-        top: auto;
-        right: 10px;
-        bottom: 45px; /* Ajustado para que no choque con el footer */
-    }
-    
-    footer {
-        padding: 0.5rem; /* Reducido */
-        font-size: 0.75rem; /* Reducido */
-    }
-    
-    .toast-container {
-        bottom: 40px; /* Ajustado */
-        right: 10px;
-        max-width: calc(100% - 20px);
+
+    @media (max-width: 576px) {
+        body {
+            padding-bottom: 35px;
+        }
+
+        main {
+            padding: 0 0.8rem;
+            margin: 1rem auto;
+        }
+
+        header h1 {
+            font-size: 1.1rem;
+        }
+
+        nav a {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .form-container,
+        .empleados-container {
+            padding: 1rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+        }
+
+        .form-group input {
+            padding: 0.6rem;
+            font-size: 0.9rem;
+
+            .btn {
+                width: 100%;
+                padding: 0.6rem 1rem;
+            }
+
+            .theme-switch-wrapper {
+                top: auto;
+                right: 10px;
+                bottom: 45px;
+            }
+
+            footer {
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .toast-container {
+                bottom: 40px;
+                right: 10px;
+                max-width: calc(100% - 20px);
+            }
+        }
     }
 }

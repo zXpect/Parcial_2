@@ -13,7 +13,6 @@ coleccion_empleados = db.empleados
 
 @app.route('/')
 def index():
-    """Página principal con formulario para añadir empleados"""
     return render_template('index.html')
 
 @app.route('/empleados', methods=['POST'])

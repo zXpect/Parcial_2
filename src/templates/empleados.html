@@ -5,7 +5,7 @@
 {% block content %}
 <section class="empleados-container animated-item">
     <h2>Lista de Empleados</h2>
-    
+
     <div class="filtros animated-item" style="--animation-order: 1;">
         <h3>Buscar empleados</h3>
         <form action="{{ url_for('consultar_empleados') }}" method="GET" class="filtros-form">
@@ -13,21 +13,22 @@
                 <label for="nombre_empleado">Nombre:</label>
                 <input type="text" id="nombre_empleado" name="nombre_empleado" placeholder="Buscar por nombre">
             </div>
-            
+
             <div class="form-group" style="--animation-order: 3;">
                 <label for="apellido_empleado">Apellido:</label>
                 <input type="text" id="apellido_empleado" name="apellido_empleado" placeholder="Buscar por apellido">
             </div>
-            
+
             <div class="form-group" style="--animation-order: 4;">
                 <label for="departamento_empleado">Departamento:</label>
-                <input type="text" id="departamento_empleado" name="departamento_empleado" placeholder="Buscar por departamento">
+                <input type="text" id="departamento_empleado" name="departamento_empleado"
+                    placeholder="Buscar por departamento">
             </div>
-            
+
             <button type="submit" class="btn">Buscar</button>
         </form>
     </div>
-    
+
     {% if filtros %}
     <div class="filtros-activos animated-item" style="--animation-order: 5;">
         <h4>Filtros aplicados:</h4>
@@ -39,7 +40,7 @@
         <a href="{{ url_for('listar_empleados') }}" class="boton-limpiar">Limpiar filtros</a>
     </div>
     {% endif %}
-    
+
     <div class="tabla-container animated-item" style="--animation-order: 6;">
         {% if empleados %}
         <div class="tabla-responsive">
@@ -76,7 +77,7 @@
         </div>
         {% endif %}
     </div>
-    
+
     <div class="acciones animated-item" style="--animation-order: 8;">
         <a href="{{ url_for('index') }}" class="btn">Registrar Nuevo Empleado</a>
     </div>
@@ -84,13 +85,13 @@
 
 <script>
     // Animar elementos al cargar la página
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const animatedItems = document.querySelectorAll('.animated-item');
         animatedItems.forEach(item => {
             item.classList.add('active');
         });
     });
-    
+
     // Aplicar clases de animación a las filas de la tabla
     const tableRows = document.querySelectorAll('.tabla-empleados tbody tr');
     tableRows.forEach((row, index) => {

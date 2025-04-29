@@ -5,52 +5,55 @@
 {% block content %}
 <section class="form-container animated-item">
     <h2><i class="fas fa-user-plus"></i> Registro de Nuevo Empleado</h2>
-    
+
     <div id="mensaje" class="mensaje"></div>
-    
+
     <form id="empleado-form">
         <div class="form-group animated-item">
             <label for="nombre_empleado">Nombre</label>
             <input type="text" id="nombre_empleado" name="nombre_empleado" placeholder="Ingrese el nombre" required>
         </div>
-        
+
         <div class="form-group animated-item">
             <label for="apellido_empleado">Apellido</label>
-            <input type="text" id="apellido_empleado" name="apellido_empleado" placeholder="Ingrese el apellido" required>
+            <input type="text" id="apellido_empleado" name="apellido_empleado" placeholder="Ingrese el apellido"
+                required>
         </div>
-        
+
         <div class="form-group animated-item">
             <label for="direccion_empleado">Dirección</label>
-            <input type="text" id="direccion_empleado" name="direccion_empleado" placeholder="Ingrese la dirección" required>
+            <input type="text" id="direccion_empleado" name="direccion_empleado" placeholder="Ingrese la dirección"
+                required>
         </div>
-        
+
         <div class="form-group animated-item">
             <label for="contrato_empleado">Fecha de Contrato</label>
             <input type="date" id="contrato_empleado" name="contrato_empleado" required>
         </div>
-        
+
         <div class="form-group animated-item">
             <label for="salario_empleado">Salario</label>
-            <input type="number" id="salario_empleado" name="salario_empleado" placeholder="Ingrese el salario" required>
+            <input type="number" id="salario_empleado" name="salario_empleado" placeholder="Ingrese el salario"
+                required>
         </div>
-        
+
         <div class="form-group animated-item">
             <label for="departamento_empleado">Departamento</label>
-            <input type="text" id="departamento_empleado" name="departamento_empleado" placeholder="Ingrese el departamento" required>
+            <input type="text" id="departamento_empleado" name="departamento_empleado"
+                placeholder="Ingrese el departamento" required>
         </div>
-        
+
         <div class="form-group animated-item">
             <label for="cargo_empleado">Cargo</label>
             <input type="text" id="cargo_empleado" name="cargo_empleado" placeholder="Ingrese el cargo" required>
         </div>
-        
+
         <button type="submit" class="btn animated-item">
             <i class="fas fa-save"></i> Guardar Empleado
         </button>
     </form>
 </section>
 
-<!-- Toast notifications container -->
 <div class="toast-container" id="toast-container"></div>
 
 {% endblock %}
