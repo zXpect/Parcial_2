@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Empleados{% endblock %}
+
+{% block content %}
+<section class="empleados-container">
+    <h2>Lista de Empleados</h2>
+    
+    <div class="filtros">
+        <h3>Buscar empleados</h3>
+        <form action="{{ url_for('consultar_empleados') }}" method="GET">
+            <div class="form-group">
+                <label for="nombre_empleado">Nombre:</label>
+                <input type="text" id="nombre_empleado" name="nombre_empleado">
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido_empleado">Apellido:</label>
+                <input type="text" id="apellido_empleado" name="apellido_empleado">
+            </div>
+            
+            <div class="form-group">
+                <label for="departamento_empleado">Departamento:</label>
+                <input type="text" id="departamento_empleado" name="departamento_empleado">
+            </div>
+            
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    
+    {% if filtros %}
+    <div class="filtros-activos">
+        <h4>Filtros aplicados:</h4>
+        <ul>
+            {% for clave, valor in filtros.items() %}
+            <li>{{ clave }}: {{ valor }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('listar_empleados') }}" class="boton-limpiar">Limpiar filtros</a>
+    </div>
+    {% endif %}
+    
+    {% if empleados %}
+    <table class="tabla-empleados">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dirección</th>
+                <th>Fecha de Contrato</th>
+                <th>Salario</th>
+                <th>Departamento</th>
+                <th>Cargo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados %}
+            <tr>
+                <td>{{ empleado.nombre_empleado }}</td>
+                <td>{{ empleado.apellido_empleado }}</td>
+                <td>{{ empleado.direccion_empleado }}</td>
+                <td>{{ empleado.contrato_empleado }}</td>
+                <td>{{ empleado.salario_empleado }}</td>
+                <td>{{ empleado.departamento_empleado }}</td>
+                <td>{{ empleado.cargo_empleado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-empleados">No se encontraron empleados.</p>
+    {% endif %}
+</section>
+{% endblock %}

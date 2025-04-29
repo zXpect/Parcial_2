@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro de Empleados{% endblock %}
+
+{% block content %}
+<section class="form-container">
+    <h2>Registro de Nuevo Empleado</h2>
+    
+    <div id="mensaje" class="mensaje"></div>
+    
+    <form id="empleado-form">
+        <div class="form-group">
+            <label for="nombre_empleado">Nombre:</label>
+            <input type="text" id="nombre_empleado" name="nombre_empleado" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="apellido_empleado">Apellido:</label>
+            <input type="text" id="apellido_empleado" name="apellido_empleado" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="direccion_empleado">Dirección:</label>
+            <input type="text" id="direccion_empleado" name="direccion_empleado" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="contrato_empleado">Fecha de Contrato:</label>
+            <input type="date" id="contrato_empleado" name="contrato_empleado" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="salario_empleado">Salario:</label>
+            <input type="number" id="salario_empleado" name="salario_empleado" required>
+        </div>
+        
+        <!-- Campo adicional 1 -->
+        <div class="form-group">
+            <label for="departamento_empleado">Departamento:</label>
+            <input type="text" id="departamento_empleado" name="departamento_empleado" required>
+        </div>
+        
+        <!-- Campo adicional 2 -->
+        <div class="form-group">
+            <label for="cargo_empleado">Cargo:</label>
+            <input type="text" id="cargo_empleado" name="cargo_empleado" required>
+        </div>
+        
+        <button type="submit">Guardar Empleado</button>
+    </form>
+</section>
+
+<script>
+    document.getElementById('empleado-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Obtener datos del formulario
+        const formData = new FormData(this);
+        
+        // Enviar datos mediante fetch
+        fetch('/empleados', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            const mensaje = document.getElementById('mensaje');
+            
+            if (data.status === 'success') {
+                mensaje.innerHTML = data.message;
+                mensaje.className = 'mensaje success';
+                document.getElementById('empleado-form').reset();
+            } else {
+                mensaje.innerHTML = 'Error: ' + data.message;
+                mensaje.className = 'mensaje error';
+            }
+            
+            // Mostrar el mensaje por 3 segundos
+            setTimeout(() => {
+                mensaje.innerHTML = '';
+                mensaje.className = 'mensaje';
+            }, 3000);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+{% endblock %}
