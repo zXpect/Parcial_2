@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sistema de Nómina{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#ff7b25">
 </head>
 <body>
+    <!-- Switch para modo oscuro/claro -->
+    <div class="theme-switch-wrapper">
+        <span class="slider-icon">🌙</span>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <span class="slider-icon">☀️</span>
+    </div>
+    
     <header>
         <h1>Sistema de Gestión de Nómina</h1>
         <nav>
@@ -24,5 +36,60 @@
     <footer>
         <p>Parcial No. 2 - Electiva Profesional II - Ingeniería de Sistemas</p>
     </footer>
+    
+    <!-- Toast container para notificaciones -->
+    <div class="toast-container" id="toast-container"></div>
+    
+    <script>
+        // Cambio de tema (modo oscuro/claro)
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        // Verificar preferencia guardada
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.checked = true;
+        }
+        
+        // Escuchar cambios en el switch
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Función para mostrar notificaciones toast
+        function showToast(message, type = 'success') {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icon = type === 'success' ? '✅' : '❌';
+            
+            toast.innerHTML = `
+                <span class="toast-icon">${icon}</span>
+                <span class="toast-message">${message}</span>
+                <div class="toast-progress"></div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Mostrar el toast con un pequeño retraso para permitir la transición
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // Eliminar el toast después de 5 segundos
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 400);
+            }, 5000);
+        }
+    </script>
 </body>
 </html>

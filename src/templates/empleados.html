@@ -3,33 +3,33 @@
 {% block title %}Lista de Empleados{% endblock %}
 
 {% block content %}
-<section class="empleados-container">
+<section class="empleados-container animated-item">
     <h2>Lista de Empleados</h2>
     
-    <div class="filtros">
+    <div class="filtros animated-item" style="--animation-order: 1;">
         <h3>Buscar empleados</h3>
-        <form action="{{ url_for('consultar_empleados') }}" method="GET">
-            <div class="form-group">
+        <form action="{{ url_for('consultar_empleados') }}" method="GET" class="filtros-form">
+            <div class="form-group" style="--animation-order: 2;">
                 <label for="nombre_empleado">Nombre:</label>
-                <input type="text" id="nombre_empleado" name="nombre_empleado">
+                <input type="text" id="nombre_empleado" name="nombre_empleado" placeholder="Buscar por nombre">
             </div>
             
-            <div class="form-group">
+            <div class="form-group" style="--animation-order: 3;">
                 <label for="apellido_empleado">Apellido:</label>
-                <input type="text" id="apellido_empleado" name="apellido_empleado">
+                <input type="text" id="apellido_empleado" name="apellido_empleado" placeholder="Buscar por apellido">
             </div>
             
-            <div class="form-group">
+            <div class="form-group" style="--animation-order: 4;">
                 <label for="departamento_empleado">Departamento:</label>
-                <input type="text" id="departamento_empleado" name="departamento_empleado">
+                <input type="text" id="departamento_empleado" name="departamento_empleado" placeholder="Buscar por departamento">
             </div>
             
-            <button type="submit">Buscar</button>
+            <button type="submit" class="btn">Buscar</button>
         </form>
     </div>
     
     {% if filtros %}
-    <div class="filtros-activos">
+    <div class="filtros-activos animated-item" style="--animation-order: 5;">
         <h4>Filtros aplicados:</h4>
         <ul>
             {% for clave, valor in filtros.items() %}
@@ -40,35 +40,62 @@
     </div>
     {% endif %}
     
-    {% if empleados %}
-    <table class="tabla-empleados">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Dirección</th>
-                <th>Fecha de Contrato</th>
-                <th>Salario</th>
-                <th>Departamento</th>
-                <th>Cargo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for empleado in empleados %}
-            <tr>
-                <td>{{ empleado.nombre_empleado }}</td>
-                <td>{{ empleado.apellido_empleado }}</td>
-                <td>{{ empleado.direccion_empleado }}</td>
-                <td>{{ empleado.contrato_empleado }}</td>
-                <td>{{ empleado.salario_empleado }}</td>
-                <td>{{ empleado.departamento_empleado }}</td>
-                <td>{{ empleado.cargo_empleado }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p class="no-empleados">No se encontraron empleados.</p>
-    {% endif %}
+    <div class="tabla-container animated-item" style="--animation-order: 6;">
+        {% if empleados %}
+        <div class="tabla-responsive">
+            <table class="tabla-empleados">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Dirección</th>
+                        <th>Fecha de Contrato</th>
+                        <th>Salario</th>
+                        <th>Departamento</th>
+                        <th>Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in empleados %}
+                    <tr style="--animation-order: {{ loop.index + 6 }};">
+                        <td>{{ empleado.nombre_empleado }}</td>
+                        <td>{{ empleado.apellido_empleado }}</td>
+                        <td>{{ empleado.direccion_empleado }}</td>
+                        <td>{{ empleado.contrato_empleado }}</td>
+                        <td>{{ empleado.salario_empleado }}</td>
+                        <td>{{ empleado.departamento_empleado }}</td>
+                        <td>{{ empleado.cargo_empleado }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-empleados animated-item" style="--animation-order: 7;">
+            <p>No se encontraron empleados con los criterios de búsqueda.</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="acciones animated-item" style="--animation-order: 8;">
+        <a href="{{ url_for('index') }}" class="btn">Registrar Nuevo Empleado</a>
+    </div>
 </section>
+
+<script>
+    // Animar elementos al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        const animatedItems = document.querySelectorAll('.animated-item');
+        animatedItems.forEach(item => {
+            item.classList.add('active');
+        });
+    });
+    
+    // Aplicar clases de animación a las filas de la tabla
+    const tableRows = document.querySelectorAll('.tabla-empleados tbody tr');
+    tableRows.forEach((row, index) => {
+        row.classList.add('animated-item');
+        row.style.setProperty('--animation-order', index + 7);
+    });
+</script>
 {% endblock %}
