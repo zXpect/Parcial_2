@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sistema de Nómina{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#ff7b25">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Switch para modo oscuro/claro -->
+    <!-- Botón para cambiar el tema -->
     <div class="theme-switch-wrapper">
-        <span class="slider-icon">🌙</span>
+        <span class="slider-icon"><i class="fas fa-sun"></i></span>
         <label class="theme-switch">
             <input type="checkbox" id="theme-toggle">
             <span class="slider"></span>
         </label>
-        <span class="slider-icon">☀️</span>
+        <span class="slider-icon"><i class="fas fa-moon"></i></span>
     </div>
+    
+    <!-- Contenedor para notificaciones toast -->
+    <div class="toast-container" id="toast-container"></div>
     
     <header>
         <h1>Sistema de Gestión de Nómina</h1>
         <nav>
             <ul>
-                <li><a href="{{ url_for('index') }}">Nuevo Empleado</a></li>
-                <li><a href="{{ url_for('listar_empleados') }}">Listar Empleados</a></li>
+                <li><a href="{{ url_for('index') }}"><i class="fas fa-user-plus"></i> Nuevo</a></li>
+                <li><a href="{{ url_for('listar_empleados') }}"><i class="fas fa-list"></i> Listar</a></li>
             </ul>
         </nav>
     </header>
@@ -36,60 +40,78 @@
     <footer>
         <p>Parcial No. 2 - Electiva Profesional II - Ingeniería de Sistemas</p>
     </footer>
-    
-    <!-- Toast container para notificaciones -->
-    <div class="toast-container" id="toast-container"></div>
-    
+
+    <!-- Scripts globales -->
     <script>
-        // Cambio de tema (modo oscuro/claro)
-        const themeToggle = document.getElementById('theme-toggle');
-        
-        // Verificar preferencia guardada
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.checked = true;
-        }
-        
-        // Escuchar cambios en el switch
-        themeToggle.addEventListener('change', function() {
-            if (this.checked) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
+        // Manejo del tema oscuro/claro
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleSwitch = document.getElementById('theme-toggle');
+            
+            // Verificar tema guardado
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            // Establecer el estado del switch
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
             }
+            
+            // Cambiar tema al hacer clic en el switch
+            toggleSwitch.addEventListener('change', function(e) {
+                if (e.target.checked) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Animar entrada de elementos
+            animateItems();
         });
         
+        // Función para animar elementos con clase .animated-item
+        function animateItems() {
+            const items = document.querySelectorAll('.animated-item');
+            items.forEach((item, index) => {
+                item.style.setProperty('--animation-order', index + 1);
+            });
+        }
+        
         // Función para mostrar notificaciones toast
-        function showToast(message, type = 'success') {
-            const toastContainer = document.getElementById('toast-container');
+        function showToast(message, type = 'success', duration = 5000) {
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             
-            const icon = type === 'success' ? '✅' : '❌';
+            const icon = type === 'success' 
+                ? '<i class="fas fa-check-circle toast-icon" style="color: var(--color-success)"></i>' 
+                : '<i class="fas fa-exclamation-circle toast-icon" style="color: var(--color-error)"></i>';
             
             toast.innerHTML = `
-                <span class="toast-icon">${icon}</span>
-                <span class="toast-message">${message}</span>
+                ${icon}
+                <div class="toast-message">${message}</div>
                 <div class="toast-progress"></div>
             `;
             
-            toastContainer.appendChild(toast);
+            const container = document.getElementById('toast-container');
+            container.appendChild(toast);
             
-            // Mostrar el toast con un pequeño retraso para permitir la transición
+            // Mostrar el toast después de un breve retraso
             setTimeout(() => {
                 toast.classList.add('show');
             }, 10);
             
-            // Eliminar el toast después de 5 segundos
+            // Ocultar y eliminar el toast después de la duración
             setTimeout(() => {
                 toast.classList.remove('show');
                 setTimeout(() => {
-                    toast.remove();
+                    container.removeChild(toast);
                 }, 400);
-            }, 5000);
+            }, duration);
         }
     </script>
+    
+    {% block scripts %}{% endblock %}
 </body>
 </html>

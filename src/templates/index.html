@@ -9,207 +9,52 @@
     <div id="mensaje" class="mensaje"></div>
     
     <form id="empleado-form">
-        <div class="form-group animated-item" style="--animation-order: 1;">
+        <div class="form-group animated-item">
             <label for="nombre_empleado">Nombre</label>
             <input type="text" id="nombre_empleado" name="nombre_empleado" placeholder="Ingrese el nombre" required>
         </div>
         
-        <div class="form-group animated-item" style="--animation-order: 2;">
+        <div class="form-group animated-item">
             <label for="apellido_empleado">Apellido</label>
             <input type="text" id="apellido_empleado" name="apellido_empleado" placeholder="Ingrese el apellido" required>
         </div>
         
-        <div class="form-group animated-item" style="--animation-order: 3;">
+        <div class="form-group animated-item">
             <label for="direccion_empleado">Dirección</label>
             <input type="text" id="direccion_empleado" name="direccion_empleado" placeholder="Ingrese la dirección" required>
         </div>
         
-        <div class="form-group animated-item" style="--animation-order: 4;">
+        <div class="form-group animated-item">
             <label for="contrato_empleado">Fecha de Contrato</label>
             <input type="date" id="contrato_empleado" name="contrato_empleado" required>
         </div>
         
-        <div class="form-group animated-item" style="--animation-order: 5;">
+        <div class="form-group animated-item">
             <label for="salario_empleado">Salario</label>
             <input type="number" id="salario_empleado" name="salario_empleado" placeholder="Ingrese el salario" required>
         </div>
         
-        <div class="form-group animated-item" style="--animation-order: 6;">
+        <div class="form-group animated-item">
             <label for="departamento_empleado">Departamento</label>
             <input type="text" id="departamento_empleado" name="departamento_empleado" placeholder="Ingrese el departamento" required>
         </div>
         
-        <div class="form-group animated-item" style="--animation-order: 7;">
+        <div class="form-group animated-item">
             <label for="cargo_empleado">Cargo</label>
             <input type="text" id="cargo_empleado" name="cargo_empleado" placeholder="Ingrese el cargo" required>
         </div>
         
-        <button type="submit" class="btn animated-item" style="--animation-order: 8;">
+        <button type="submit" class="btn animated-item">
             <i class="fas fa-save"></i> Guardar Empleado
         </button>
     </form>
 </section>
 
-<!-- Contenedor para notificaciones toast -->
-<div class="toast-container"></div>
+<!-- Toast notifications container -->
+<div class="toast-container" id="toast-container"></div>
 
 {% endblock %}
 
 {% block scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('empleado-form');
-        const mensajeEl = document.getElementById('mensaje');
-        
-        // Efecto de focus en campos de formulario
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            // Efecto al enfocar
-            input.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
-            });
-            
-            // Efecto al perder foco
-            input.addEventListener('blur', function() {
-                if (this.value === '') {
-                    this.parentElement.classList.remove('focused');
-                }
-            });
-            
-            // Mantener clase si tiene valor al cargar
-            if (input.value !== '') {
-                input.parentElement.classList.add('focused');
-            }
-        });
-        
-        // Función para mostrar notificaciones toast
-        function showToast(message, type = 'success', duration = 5000) {
-            const toastContainer = document.querySelector('.toast-container');
-            
-            // Crear elemento toast
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            
-            // Icono según el tipo
-            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-            
-            // Contenido del toast
-            toast.innerHTML = `
-                <div class="toast-icon"><i class="fas ${icon}"></i></div>
-                <div class="toast-message">${message}</div>
-                <div class="toast-progress"></div>
-            `;
-            
-            // Agregar a contenedor
-            toastContainer.appendChild(toast);
-            
-            // Mostrar con animación
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 10);
-            
-            // Ocultar después de un tiempo
-            setTimeout(() => {
-                toast.classList.remove('show');
-                
-                // Eliminar del DOM después de la animación
-                setTimeout(() => {
-                    toastContainer.removeChild(toast);
-                }, 400);
-            }, duration);
-        }
-        
-        // Efecto de ripple en botón submit
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-        
-        // Validación y envío del formulario
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Mostrar animación de carga en el botón
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
-            submitBtn.disabled = true;
-            
-            // Obtener datos del formulario
-            const formData = new FormData(this);
-            
-            // Enviar datos mediante fetch
-            fetch('/empleados', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Restaurar botón
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-                
-                if (data.status === 'success') {
-                    // Mostrar mensaje de éxito
-                    mensajeEl.innerHTML = `<i class="fas fa-check-circle"></i> ${data.message}`;
-                    mensajeEl.className = 'mensaje success active';
-                    
-                    // Mostrar notificación toast
-                    showToast('Empleado guardado exitosamente', 'success');
-                    
-                    // Limpiar formulario con animación
-                    form.reset();
-                    inputs.forEach(input => {
-                        input.parentElement.classList.remove('focused');
-                    });
-                    
-                    // Efecto de "shake" en el formulario para confirmar el reset
-                    form.classList.add('reset-animation');
-                    setTimeout(() => {
-                        form.classList.remove('reset-animation');
-                    }, 500);
-                } else {
-                    // Mostrar mensaje de error
-                    mensajeEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${data.message}`;
-                    mensajeEl.className = 'mensaje error active';
-                    
-                    // Mostrar notificación toast
-                    showToast(`Error: ${data.message}`, 'error');
-                }
-                
-                // Ocultar mensaje después de un tiempo
-                setTimeout(() => {
-                    mensajeEl.classList.remove('active');
-                }, 5000);
-            })
-            .catch(error => {
-                // Restaurar botón
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-                
-                // Mostrar mensaje de error
-                mensajeEl.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error de conexión';
-                mensajeEl.className = 'mensaje error active';
-                
-                // Mostrar notificación toast
-                showToast('Error de conexión al servidor', 'error');
-                
-                console.error('Error:', error);
-            });
-        });
-    });
-</script>
+<script src="{{ url_for('static', filename='js/empleados.js') }}"></script>
 {% endblock %}
